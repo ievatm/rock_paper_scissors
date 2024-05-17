@@ -1,3 +1,6 @@
+//  Create two new variables named humanScore and computerScore in the global scope.
+let humanScore = 0;
+let computerScore = 0;
 
 // function to get computers choice 
 
@@ -26,11 +29,6 @@ function getHumanChoice() {
 }
 
 console.log(getHumanChoice());
-
-
-
-
-
 
 
 
