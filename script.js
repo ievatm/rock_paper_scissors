@@ -12,14 +12,20 @@ console.log(getComputerChoice());
 // The logic to get the human choice
 
 function getHumanChoice() {
-    
+    let userInput = prompt("Which one do you choose: rock, paper or scissors?");
+    userInput = userInput.toLowerCase(); 
+    // check for valid choice
+    const validChoices = ["rock", "paper", "scissors"];
+    if (validChoices.includes(userInput)) {
+        return userInput;
+    } else {
+        alert("Wrong input, please try again and enter rock, paper or scissors!");
+    }
+    // prompt again
+    return getHumanChoice();
 }
-// Your game will be played by a human player. You will write a function that takes the user choice and returns it.
 
-
-// Write the code so that getHumanChoice will return one of the valid choices depending on what the user inputs.
-// Hint: Use the prompt method to get the user’s input.
-// Test what your function returns by using console.log.
+console.log(getHumanChoice());
 
 
 
