@@ -1,6 +1,29 @@
+
 //  Create two new variables named humanScore and computerScore in the global scope.
-let humanScore = 0;
-let computerScore = 0;
+// rounds played added
+    let humanScore = 0;
+    let computerScore = 0;
+    let roundsPlayed = 0;
+
+//  Write the logic to play the entire game for 5 rounds and declare a winner at the end.
+function playGame() {
+
+    while (roundsPlayed <5 && humanScore <3 && computerScore <3) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice(); 
+        playRound(humanSelection, computerSelection);
+        roundsPlayed++;
+        alert("Round " + roundsPlayed + " played! Your score: " + humanScore + ". Computers score: " + computerScore + ".")
+    }
+
+    if (humanScore > computerScore) {
+        alert("You win!");
+    } else if (humanScore < computerScore) {
+        alert("You lose!");
+    } else {
+       alert("It's a tie!");
+    }
+}
 
 // function to get computers choice 
 
@@ -9,8 +32,6 @@ function getComputerChoice() {
     const randomIndex = Math.floor(Math.random() * choices.length);
     return choices[randomIndex];
 }
-
-// console.log(getComputerChoice());
 
 // The logic to get the human choice
 
@@ -27,8 +48,6 @@ function getHumanChoice() {
     // prompt again
     return getHumanChoice();
 }
-
-// console.log(getHumanChoice());
 
 // Write the logic to play a single round
 
@@ -50,8 +69,6 @@ function playRound(humanChoice, computerChoice) {
         computerScore++;
     }
   }
-  
-  const humanSelection = getHumanChoice();
-  const computerSelection = getComputerChoice();
-  
-  playRound(humanSelection, computerSelection);
+
+playGame();
+
