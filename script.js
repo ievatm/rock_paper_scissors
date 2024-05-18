@@ -10,7 +10,7 @@ function getComputerChoice() {
     return choices[randomIndex];
 }
 
-console.log(getComputerChoice());
+// console.log(getComputerChoice());
 
 // The logic to get the human choice
 
@@ -28,7 +28,30 @@ function getHumanChoice() {
     return getHumanChoice();
 }
 
-console.log(getHumanChoice());
+// console.log(getHumanChoice());
 
+// Write the logic to play a single round
 
-
+function playRound(humanChoice, computerChoice) {
+    humanChoice = humanChoice.toLowerCase();
+    if (humanChoice === computerChoice) {
+        console.log("It's a tie!");
+    } else if (
+         (humanChoice === "rock" && computerChoice === "scissors") ||
+         (humanChoice === "paper" && computerChoice === "rock") ||
+         (humanChoice === "scissors" && computerChoice === "paper")
+    ) {
+        console.log("You win! " + humanChoice + " beats " + computerChoice);
+        // Increment the humanScore variable based on the round winner.
+        humanScore++;
+    } else {
+        console.log("You lose! " + computerChoice + " beats " + humanChoice);
+        // Increment the computerScore variable based on the round winner.
+        computerScore++;
+    }
+  }
+  
+  const humanSelection = getHumanChoice();
+  const computerSelection = getComputerChoice();
+  
+  playRound(humanSelection, computerSelection);
