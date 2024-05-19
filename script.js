@@ -35,9 +35,10 @@ function getHumanChoice() {
         return userInput;
     } else {
         alert("Wrong input, please try again and enter rock, paper or scissors!");
+        // prompt again
+        return getHumanChoice();
     }
-    // prompt again
-    return getHumanChoice();
+    
 }
 
 function playRound(humanChoice, computerChoice) {
