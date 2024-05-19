@@ -4,8 +4,7 @@
     let roundsPlayed = 0;
 
 function playGame() {
-
-    while (roundsPlayed <5 && humanScore <3 && computerScore <3) {
+    while (roundsPlayed <5) {
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice(); 
         playRound(humanSelection, computerSelection);
