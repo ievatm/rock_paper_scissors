@@ -2,65 +2,67 @@
 let humanScore = 0;
 let computerScore = 0;
 
-document.getElementById("rock").addEventListener("click", () => playRound("rock"));
-document.getElementById("paper").addEventListener("click", () => playRound("paper");
-document.getElementById("scissors").addEventListener("click", () => playRound("scissors");
-    
-
-function playGame() {
-    while (roundsPlayed <5) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice(); 
-        playRound(humanSelection, computerSelection);
-        roundsPlayed++;
-        alert("Round " + roundsPlayed + " played! Your score: " + humanScore + ". Computers score: " + computerScore + ".")
-    }
-
-    if (humanScore > computerScore) {
-        alert("You win!");
-    } else if (humanScore < computerScore) {
-        alert("You lose!");
-    } else {
-       alert("It's a tie!");
-    }
-}
-
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
     const randomIndex = Math.floor(Math.random() * choices.length);
     return choices[randomIndex];
 }
 
-function getHumanChoice() {
-    let userInput = prompt("Which one do you choose: rock, paper or scissors?");
-    userInput = userInput.toLowerCase(); 
-    const validChoices = ["rock", "paper", "scissors"];
-    if (validChoices.includes(userInput)) {
-        return userInput;
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        return "It's a tie!";
+    } else if (
+        (humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "paper" && computerChoice === "rock") ||
+        (humanChoice === "scissors" && computerChoice === "paper")
+    ) {
+        humanScore++;
+        return "You win! " + humanChoice + " beats " + computerChoice;
     } else {
-        alert("Wrong input, please try again and enter rock, paper or scissors!");
-        // prompt again
-        return getHumanChoice();
+        computerScore++;
+        return "You lose! " + computerChoice + " beats " + humanChoice;
     }
-    
 }
 
-function playRound(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toLowerCase();
-    if (humanChoice === computerChoice) {
-        console.log("It's a tie!");
-    } else if (
-         (humanChoice === "rock" && computerChoice === "scissors") ||
-         (humanChoice === "paper" && computerChoice === "rock") ||
-         (humanChoice === "scissors" && computerChoice === "paper")
-    ) {
-        console.log("You win! " + humanChoice + " beats " + computerChoice);
-        humanScore++;
-    } else {
-        console.log("You lose! " + computerChoice + " beats " + humanChoice);
-        computerScore++;
+function updateScore() {
+    const scoreDiv = document.getElementById('score');
+    scoreDiv.textContent = "Your Score: " + humanScore + " | Computer's Score: " + computerScore;
+}
+
+function checkWinner() {
+    if (humanScore === 5) {
+        document.getElementById('result').textContent = "Congratulations! You won the game!";
+        disableButtons();
+    } else if (computerScore === 5) {
+        document.getElementById('result').textContent = "Sorry, you lost the game!";
+        disableButtons();
     }
-  }
+}
 
-playGame();
+function disableButtons() {
+    document.getElementById('rock').disabled = true;
+    document.getElementById('paper').disabled = true;
+    document.getElementById('scissors').disabled = true;
+}
 
+// Event listeners for buttons
+document.getElementById('rock').addEventListener('click', () => {
+    const result = playRound('rock', getComputerChoice());
+    document.getElementById('result').textContent = result;
+    updateScore();
+    checkWinner();
+});
+
+document.getElementById('paper').addEventListener('click', () => {
+    const result = playRound('paper', getComputerChoice());
+    document.getElementById('result').textContent = result;
+    updateScore();
+    checkWinner();
+});
+
+document.getElementById('scissors').addEventListener('click', () => {
+    const result = playRound('scissors', getComputerChoice());
+    document.getElementById('result').textContent = result;
+    updateScore();
+    checkWinner();
+});
